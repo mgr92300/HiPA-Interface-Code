@@ -111,7 +111,7 @@ int main(void)
 	if(modeVar != 0)
 		{
 			HAL_DAC_SetValue(&hdac,DAC_CHANNEL_1,DAC_ALIGN_12B_R, dacVolt);
-			HAL_Delay(500);
+			HAL_Delay(10);
 		}
 	  /* USER CODE END 3 */
   }
@@ -367,17 +367,24 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 	if(GPIO_Pin == Button_Mode1_Pin)
 		{
-			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_15);	//Toggle LED 1
+			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_15); // Toggle LED 1 for half a second
+			for(int i = 0;  i<200000 ;i++);
+			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_15); // end toggle
 			modeVar = 1;
 		}
 	if(GPIO_Pin == Button_Mode2_Pin)
 		{
-			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_9);	//Toggle LED 2
+
+			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_9); // Toggle LED 2 for half a second
+			for(int i = 0;  i<200000 ;i++);
+			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_9); // end toggle
 			modeVar = 2;
 		}
 	if(GPIO_Pin == Button_Mode3_Pin)
 		{
-			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_11); // Toggle LED 3
+			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_11); // Toggle LED 3 for half a second
+			for(int i = 0;  i<200000 ;i++);
+			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_11); // ed toggle
 			modeVar = 3;
 		}
 	dacVolt = DAC_OUT[modeVar];
